@@ -12,6 +12,14 @@ Files are stored in a **private S3 bucket** and served globally over HTTPS throu
 
 The common tutorial pattern makes the bucket public. That leaves a second front door: anyone who learns the bucket address bypasses the CDN entirely. Keeping the bucket private and giving CloudFront its own identity closes that door. Trade-off: ~20% more Terraform (OAC resource, scoped bucket policy, four public-access blocks) in exchange for a single entry point and least-privilege access.
 
+## Remote state
+
+Terraform tracks what it provisions in a state file. By default that file lives locally. Fine for one person, dangerous for a team. Since two people running 'apply' against the same local state can overwrite each other's work.
+
+This project stores state remotely in a dedicated, encrypted S3 bucket, with **native S3 locking** ('use_lockfile') preventing concurrent writes. Trade-off: a little more setup (a bootstrapped state bucket, a backend block) in exchange for state that's shareable, recoverable, and safe for more than one engineer to touch.
+
+> Locking note: earlier Terraform required a separate DynamoDB table for locking. Terraform 1.10+ supports locking natively in S3, so this project uses 'use_lockfile' and no DynamoDB table, the current recommended pattern.
+
 ## Getting Started
 
 ### Prerequisites
@@ -65,6 +73,7 @@ Same file, two doors, two answers.
 - Terraform `v1.15.4`
 - `hashicorp/aws` `v6.50.0`
 - Region: `us-east-1`
+- Remote state: S3 backend with native lockfile locking, encrypted at rest
 
 ## Full write-up
 
