@@ -77,4 +77,4 @@ Same file, two doors, two answers.
 
 ## Full write-up
 
-The reasoning behind every decision, including what I'd do differently, is in my Medium blog post.
+The reasoning behind every decision, including what I'd do differently, is in my Medium blog post: https://medium.com/@ecoufalleano/a-freelance-designer-needed-a-website-the-interesting-part-was-everything-behind-it-c71a36664ebe
