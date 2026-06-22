@@ -31,7 +31,7 @@ resource "aws_cloudfront_origin_access_control" "website" {
     description                         = "OAC for portfolio S3 bucket"
     origin_access_control_origin_type   = "s3"
     signing_behavior                    = "always"
-    signing_protocol                    = "sigv4"    
+    signing_protocol                    = "sigv4"   
 }
 
 resource "aws_cloudfront_distribution" "website" {
@@ -79,7 +79,7 @@ resource "aws_s3_bucket_policy" "website" {
                 Effect      = "Allow"
                 Principal   = {
                     Service = "cloudfront.amazonaws.com"
-                } 
+                }
                 Action      = "s3:GetObject"
                 Resource    = "${aws_s3_bucket.website.arn}/*"
                 Condition   = {
