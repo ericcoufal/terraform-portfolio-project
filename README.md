@@ -1,12 +1,12 @@
 # Terraform Portfolio Project
 
-A static **Next.js** site deployed to AWS as **infrastructure as code** — reproducible from a single `terraform apply`, no click-ops.
+A static **Next.js** site deployed to AWS as **infrastructure as code**, reproducible from a single `terraform apply`, no click-ops.
 
 **Live:** https://d19j21iocmn17k.cloudfront.net
 
 ## Architecture
 
-Files are stored in a **private S3 bucket** and served globally over HTTPS through **CloudFront** (AWS's CDN). The bucket is never public. CloudFront reaches it through an **Origin Access Control (OAC)** with SigV4 signing, and a bucket policy grants `s3:GetObject` to *only this specific distribution* — one controlled entry point instead of two.
+Files are stored in a **private S3 bucket** and served globally over HTTPS through **CloudFront** (AWS's CDN). The bucket is never public. CloudFront reaches it through an **Origin Access Control (OAC)** with SigV4 signing, and a bucket policy grants `s3:GetObject` to *only this specific distribution*, one controlled entry point instead of two.
 
 ## Why private S3 + OAC
 
